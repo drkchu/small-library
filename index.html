@@ -5,9 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Small Library App</title>
     <link rel="stylesheet" href="style.css">
+    <!--Linking Tailwind CSS-->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    
+    <div class="window-container">
+
+        <!--Header-->
+        <div class="header">
+            <h1 class="text-4xl font-sans font-bold">Derek's Library</h1>
+        </div>
+
+        <!--Main Content-->
+        <div class="content-container">
+            <button class="add-book-button bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                Add a Book!
+            </button>
+            <div class="library-container">
+
+            </div>
+        </div>
+
+        <!--Footer-->
+        <footer class="footer">
+            <p id="copyright"></p>
+        </footer>
+
+    </div>
+
     <!--Linking the script so that everything else has loaded before-->
     <script src="script.js"></script>
 </body>
