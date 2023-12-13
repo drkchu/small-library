@@ -7,6 +7,8 @@
 :root {
     --gray: #dddddd;
     --light-brown: #C4A484;
+    --green: rgb(34 197 94);
+    --red: rgb(239 68 68);
 }
 
 .window-container {
@@ -59,6 +61,14 @@
     gap: 0.75rem;
 }
 
+.read {
+    background-color: var(--green);
+}
+
+.not-read-yet {
+    background-color: var(--red);
+}
+
 .header,
 .footer {
     display: flex;
@@ -75,6 +85,43 @@
     justify-content: center;
 }
 
-#button {
-    background-color: red;
+/* Add a book modal and form stuff */
+.add-book-modal {
+    height: 60%;
+    width: 40%;
+    margin: auto auto;
+}
+
+.add-book-form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.form-row {
+    display: flex;
+}
+
+::backdrop {
+    background-color: black;
+    opacity: 0.30;
+  }
+
+.form-row-radio {
+    display: flex;
+    justify-content: space-around;
+}
+input:focus {
+    border: 0.3rem solid var(--gray);
+}
+
+input[type="text"],
+input[type="number"] {
+    margin-left: auto;
+    padding-left: 0.25rem;
+}
+
+input[type="radio"] {
+    transform: scale(2);
 }

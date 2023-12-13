@@ -1,4 +1,9 @@
 const myLibrary = [];
+const addBookButton = document.querySelector('.add-book-button');
+const addBookModal = document.querySelector('.add-book-modal');
+const readBookFormButton = document.querySelector('.read-button-form');
+const newBookFormButton = document.querySelector('.submit-button-form');
+const newBookForm = document.querySelector('.add-book-form');
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -8,16 +13,10 @@ function Book(title, author, pages, read) {
 }
 
 function addDefaultBookToLibrary() {
-       let newBook = new Book('Atomic Habits', 'James Clear', 320, true);
+       let newBook = new Book('Atomic Habits', 'James Clear', '320', true);
        myLibrary.push(newBook); 
 }
-function addBookToLibrary() {
-    // Get some data from the modal
-    let title = 'TITLE';
-    let author = "AUTHOR";
-    let pages = 0;
-    let read = false;
-
+function addBookToLibrary(title, author, pages, read) {
     // Create the book
     let newBook = new Book(title, author, pages, read);
 
@@ -30,6 +29,7 @@ function addBookToLibrary() {
  */
 function displayBooks() {
     let libraryContainer = document.querySelector('.library-container');
+    libraryContainer.innerHTML = ''; // Clears the current books on display
 
     myLibrary.forEach((currBook) => {
 
@@ -59,7 +59,7 @@ function displayBooks() {
         bookButtons.classList.add('book-buttons');
 
         var readButton = document.createElement('button');
-        readButton.classList.add(currBook.read ? 'bg-green-500' : 'bg-red-500','text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
+        readButton.classList.add(currBook.read ? 'read' : 'not-read-yet','text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
         readButton.textContent = currBook.read ? 'Read' : 'Not read yet'
 
         var removeButton = document.createElement('button');
@@ -77,10 +77,51 @@ function displayBooks() {
 
 // Adds a default book and displays it
 addDefaultBookToLibrary();
-
-
 displayBooks();
 
+/**
+ * Eventually refactor into single function 
+ * 
+ */
+
+// Initialize add-a-book button
+
+addBookButton.addEventListener('click', () => {
+    addBookModal.showModal();
+})
+
+// Disables submit when toggling read/not read yet for new books
+readBookFormButton.addEventListener('click', 
+    function(event) {
+        // Handle the form data
+        event.preventDefault();
+
+        if (this.classList.contains('read')) {
+            this.textContent = 'Not read yet';
+            this.classList.remove('read');
+            this.classList.add('not-read-yet');
+        } else {
+            this.textContent = 'Read';
+            this.classList.remove('not-read-yet');
+            this.classList.add('read');
+        }
+});
+
+// Disables submit when toggling read/not read yet for new books
+newBookFormButton.addEventListener('click', 
+    function(event) {
+        // Handle the form data
+        event.preventDefault();
+        if (newBookForm.checkValidity()) {
+            var title = document.querySelector('#title').value;
+            var author = document.querySelector('#author').value;
+            var pages = document.querySelector('#pages').value;
+            var read = document.querySelector('.read-button-form').classList.contains('read') ? true : false;
+            addBookToLibrary(title, author, pages, read);
+            displayBooks();
+            addBookModal.close();
+        }
+});
 /**
  * Add a copyright
  */

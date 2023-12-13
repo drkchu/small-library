@@ -22,7 +22,7 @@
                 Add a Book!
             </button>
             <div class="library-container">
-                <!--Example book-->
+                <!--Example book below-->
 
                 <!-- <div class="book">
                     <div class="book-information">
@@ -44,6 +44,32 @@
         </footer>
 
     </div>
+
+    <!--Modal for creating a new button-->
+    <dialog class="add-book-modal py-2 px-4 rounded bg-gray-200">
+        <form class="add-book-form" action="./index.html">
+
+            <div class="form-row">
+                <label for="title" class="text-3xl font-sans font-bold">Title: </label>
+                <input required id="title" type="text" class="text-3xl font-sans font-bold" placeholder="Atomic Habits">
+            </div>
+
+            <div class="form-row">
+                <label for="author" class="text-3xl font-sans font-bold">Author: </label>
+                <input required id="author" type="text" class="text-3xl font-sans font-bold" placeholder="James Clear">
+            </div>
+
+            <div class="form-row">
+                <label for="pages" class="text-3xl font-sans font-bold">Pages: </label>
+                <input required id="pages" type="number" min="0" class="text-3xl font-sans font-bold" placeholder="320">
+            </div>
+            
+            <button class="read read-button-form text-white font-bold py-2 px-4 rounded" type="submit">Read</button>
+
+            <button class="submit-button-form bg-blue-400 text-white font-bold py-2 px-4 rounded" type="submit">Create new book!</button>
+
+          </form>
+    </dialog>
 
     <!--Linking the script so that everything else has loaded before-->
     <script src="script.js"></script>
