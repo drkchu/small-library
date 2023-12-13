@@ -12,6 +12,10 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
+Book.prototype.toggleRead = function() {
+    this.read = !this.read;
+};
+
 function addDefaultBookToLibrary() {
        let newBook = new Book('Atomic Habits', 'James Clear', '320', true);
        myLibrary.push(newBook); 
@@ -62,6 +66,19 @@ function displayBooks() {
         var readButton = document.createElement('button');
         readButton.classList.add(currBook.read ? 'read' : 'not-read-yet','text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
         readButton.textContent = currBook.read ? 'Read' : 'Not read yet'
+
+        readButton.addEventListener('click', () => {
+            if (readButton.classList.contains('read')) {
+                readButton.textContent = 'Not read yet';
+                readButton.classList.remove('read');
+                readButton.classList.add('not-read-yet');
+            } else {
+                readButton.textContent = 'Read';
+                readButton.classList.remove('not-read-yet');
+                readButton.classList.add('read');
+            }
+            myLibrary[readButton.parentElement.parentElement.data].toggleRead(); // Toggle the data itself
+        });
 
         var removeButton = document.createElement('button');
         removeButton.classList.add('remove-button', 'bg-gray-500' ,'text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
