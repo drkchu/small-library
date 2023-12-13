@@ -31,8 +31,9 @@ function displayBooks() {
     let libraryContainer = document.querySelector('.library-container');
     libraryContainer.innerHTML = ''; // Clears the current books on display
 
-    myLibrary.forEach((currBook) => {
+    let numBooks = 0;
 
+    myLibrary.forEach((currBook) => {
         var book = document.createElement('div');
         book.classList.add('book');
         
@@ -63,15 +64,23 @@ function displayBooks() {
         readButton.textContent = currBook.read ? 'Read' : 'Not read yet'
 
         var removeButton = document.createElement('button');
-        removeButton.classList.add('bg-gray-500' ,'text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
+        removeButton.classList.add('remove-button', 'bg-gray-500' ,'text-white', 'font-bold', 'py-2', 'px-4', 'rounded');
         removeButton.textContent = 'Remove';
+
+        removeButton.addEventListener('click', () => { // Handles the deletion of the associated book container
+            myLibrary.splice(removeButton.parentElement.parentElement.data, 1);
+            displayBooks();
+        });
 
         bookButtons.appendChild(readButton);
         bookButtons.appendChild(removeButton);
         
         book.appendChild(bookInformation);
         book.appendChild(bookButtons);
+
+        book.data = numBooks++;
         libraryContainer.appendChild(book);
+
     })
 }
 
@@ -91,6 +100,7 @@ addBookButton.addEventListener('click', () => {
 })
 
 // Disables submit when toggling read/not read yet for new books
+// And changes the state of the button
 readBookFormButton.addEventListener('click', 
     function(event) {
         // Handle the form data
@@ -110,9 +120,9 @@ readBookFormButton.addEventListener('click',
 // Disables submit when toggling read/not read yet for new books
 newBookFormButton.addEventListener('click', 
     function(event) {
-        // Handle the form data
+        // Handle the form data (make sure it doesn't unintentionall submit the form)
         event.preventDefault();
-        if (newBookForm.checkValidity()) {
+        if (newBookForm.checkValidity()) { // forms valid we're good
             var title = document.querySelector('#title').value;
             var author = document.querySelector('#author').value;
             var pages = document.querySelector('#pages').value;
@@ -122,6 +132,8 @@ newBookFormButton.addEventListener('click',
             addBookModal.close();
         }
 });
+
+
 /**
  * Add a copyright
  */
