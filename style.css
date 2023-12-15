@@ -35,7 +35,6 @@
     grid-auto-rows: 15rem;
     height: 100%;
     width: 100%;
-    justify-content: end;
     gap: 1rem;
 }
 
