@@ -5,16 +5,18 @@ const readBookFormButton = document.querySelector('.read-button-form');
 const newBookFormButton = document.querySelector('.submit-button-form');
 const newBookForm = document.querySelector('.add-book-form');
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 
-Book.prototype.toggleRead = function() {
-    this.read = !this.read;
-};
+    toggleRead() {
+        this.read = !this.read;
+    }
+}
 
 function addDefaultBookToLibrary() {
        let newBook = new Book('Atomic Habits', 'James Clear', '320', true);
