@@ -22,6 +22,7 @@ function addDefaultBookToLibrary() {
        let newBook = new Book('Atomic Habits', 'James Clear', '320', true);
        myLibrary.push(newBook); 
 }
+
 function addBookToLibrary(title, author, pages, read) {
     // Create the book
     let newBook = new Book(title, author, pages, read);
@@ -103,6 +104,35 @@ function displayBooks() {
     })
 }
 
+// Add some info if titles are missing and what not
+function addCustomValidity() {
+    const titleInput = document.querySelector('#title');
+    const titleValidityState = titleInput.validity;
+    const authorInput = document.querySelector('#author');
+    const authorValidityState  = authorInput.validity;
+    const pageInput = document.querySelector('#pages');
+    const pageValidityState = pageInput.validity;
+
+    if (titleValidityState.valueMissing) {
+        titleInput.setCustomValidity('You need to add a title!');
+    } else {
+        titleInput.setCustomValidity('');
+    }
+
+    if (authorValidityState.valueMissing) {
+        authorInput.setCustomValidity('You need to add an author!');
+    } else {
+        authorInput.setCustomValidity('');
+    }
+
+    if (pageValidityState.valueMissing) {
+        pageInput.setCustomValidity('You need to a number of pages!');
+    } else {
+        pageInput.setCustomValidity('');
+    }
+
+}
+
 // Adds a default book and displays it
 addDefaultBookToLibrary();
 displayBooks();
@@ -141,6 +171,7 @@ newBookFormButton.addEventListener('click',
     function(event) {
         // Handle the form data (make sure it doesn't unintentionall submit the form)
         event.preventDefault();
+        addCustomValidity();
         if (newBookForm.checkValidity()) { // forms valid we're good
             var title = document.querySelector('#title').value;
             var author = document.querySelector('#author').value;
@@ -149,6 +180,8 @@ newBookFormButton.addEventListener('click',
             addBookToLibrary(title, author, pages, read);
             displayBooks();
             addBookModal.close();
+        } else {
+            newBookForm.reportValidity();
         }
 });
 
